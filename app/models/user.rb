@@ -9,6 +9,16 @@ class User < ApplicationRecord
 
   validates :email, :username, presence: true
   validates :email, :username, uniqueness: true
+  #проверка адреса эл почты
+  validates :email, format: {with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/}
+  #юзернэйм максимум 40 знаков в формате (только латинские буквы, цифры, и знак _)
+  validates :username, length: {maximum: 40}, format: {with: /\A[a-zA-Z0-9"_"]+\z/}
+
+  before_validation :username_downcase, on: :create
+
+  def username_downcase
+    self.username = username.downcase!
+  end
 
   attr_accessor :password
 

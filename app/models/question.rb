@@ -1,4 +1,5 @@
 class Question < ApplicationRecord
   belongs_to :user
-  validates :text, :user, presence: true
+  # макс длина вопроса 255
+  validates :text, :user, length: {maximum: 255}, presence: true
 end
