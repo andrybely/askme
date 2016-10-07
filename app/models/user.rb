@@ -14,7 +14,7 @@ class User < ApplicationRecord
   #юзернэйм максимум 40 знаков в формате (только латинские буквы, цифры, и знак _)
   validates :username, length: {maximum: 40}, format: {with: /\A[a-zA-Z0-9"_"]+\z/}
 
-  before_validation :username_downcase, on: :create
+  before_validation :username_downcase
 
   def username_downcase
     self.username = username.downcase!
