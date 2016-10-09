@@ -2,6 +2,11 @@
   padding: 10px 0;
 }
 
+.questions-count {
+    padding: 10px 15px;
+    margin-bottom: -12px;
+}
+
 .question {
   background: white;
 }
