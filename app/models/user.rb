@@ -17,7 +17,11 @@ class User < ApplicationRecord
   before_validation :username_downcase
 
   def username_downcase
+    if username =~ /[A-Z]/
     self.username = username.downcase!
+    else
+      username
+    end
   end
 
   attr_accessor :password
