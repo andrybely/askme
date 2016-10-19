@@ -50,29 +50,13 @@
       <% end %>
 
       <!--TODO-->
-      <%= form_for @user do |f| %>
-
-      <div class="buffer-top-large buffer-bottom">
-        Удалить пользователя?
-      </div>
-
-      <div class="form-field">
-        <%= f.label :password, 'Пароль', class: 'form-label' %>
-        <%= f.text_field :password, class: 'form-text-field' %>
-      </div>
-
-      <div class="form-field">
-        <%= f.label :password_confirmation, 'Пароль еще раз', class: 'form-label' %>
-        <%= f.text_field :password_confirmation, class: 'form-text-field' %>
-      </div>
-
       <div class="form-action">
-        <%= f.submit 'Удалить', class: 'button button-small button-dark' %>
+        <div class="buffer-top-large buffer-bottom">
+          Если вы хотите удалить пользователя нажмите "Удалить"
+        </div>
+        <%= link_to 'Удалить', user_path(@user), class: 'button button-small button-dark',
+                   method: :delete, data: {confirm: 'Точно удалить пользователя?'} %>
       </div>
-
-      <% end %>
-
-
 
     </div>
   </div>
