@@ -42,6 +42,12 @@ class UsersController < ApplicationController
     @new_question = @user.questions.build
   end
 
+  def destroy
+    @user = @user.delete
+    redirect_to root_url, notice: 'Пользователь успешно удален!'
+
+  end
+
   private
 
   def authorize_user
