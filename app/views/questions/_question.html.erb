@@ -7,6 +7,12 @@
       <%= question.text %>
     </div>
 
+    <div>
+      <% if question.questioning_user.present? %>
+           <%= link_to "@#{question.questioning_user.username}", user_path(question.questioning_user) %>
+      <% end %>
+    </div>
+
     <% if question.answer.present? %>
         <div class="question-answer text-lead">
           <%= question.answer if question.answer.present? %>
