@@ -24,6 +24,8 @@ class User < ApplicationRecord
     end
   end
 
+  @user_bg = ''
+
   attr_accessor :password
 
   validates_presence_of :password, on: :create
