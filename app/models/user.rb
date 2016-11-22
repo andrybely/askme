@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   def username_downcase
     if username =~ /[A-Z]/
-    self.username = username.downcase!
+      self.username = username.downcase!
     else
       username
     end
@@ -55,7 +55,7 @@ class User < ApplicationRecord
 
     #при аутентификации пользователя сравнивается хэш пароля, сам пароль нигде не сохраняется никогда!
     if user.present? && user.password_hash == User.hash_to_string(OpenSSL::PKCS5.pbkdf2_hmac(password,
-          user.password_salt, ITERATIONS, DIGEST.length, DIGEST))
+                                                                                             user.password_salt, ITERATIONS, DIGEST.length, DIGEST))
       user
     else
       nil

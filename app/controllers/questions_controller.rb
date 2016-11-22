@@ -12,7 +12,8 @@ class QuestionsController < ApplicationController
 
     @question.questioning_user = current_user if current_user.present?
 
-    if check_captcha(@question) && @question.save
+    if @question.save
+      #check_captcha(@question) &&
       redirect_to user_path(@question.user), notice: 'Вопрос задан'
     else
       render :edit
@@ -36,27 +37,27 @@ class QuestionsController < ApplicationController
   end
 
   private
-    def load_question
-      @question = Question.find(params[:id])
-    end
+  def load_question
+    @question = Question.find(params[:id])
+  end
 
-    def authorize_user
-      reject_user unless @question.user == current_user
-    end
+  def authorize_user
+    reject_user unless @question.user == current_user
+  end
 
-    def question_params
-      if current_user.present? && params[:question][:user_id].to_i == current_user.id
-        params.require(:question).permit(:user_id, :text, :answer)
-      else
-        params.require(:question).permit(:user_id, :text)
-      end
-    end
-
-  def check_captcha(model)
-    if current_user.present?
-      true
+  def question_params
+    if current_user.present? && params[:question][:user_id].to_i == current_user.id
+      params.require(:question).permit(:user_id, :text, :answer)
     else
-      verify_recaptcha(model: model)
+      params.require(:question).permit(:user_id, :text)
     end
   end
+
+  #def check_captcha(model)
+  # if current_user.present?
+  #  true
+  #else
+  # verify_recaptcha(model: model)
+  #end
+  #end
 end
