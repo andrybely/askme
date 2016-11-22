@@ -10,11 +10,8 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
 
-    @question.questioning_user = current_user if current_user.present?
-
     if @question.save
-      #check_captcha(@question) &&
-      redirect_to user_path(@question.user), notice: 'Вопрос задан'
+      check_captcha(@question) && (redirect_to user_path(@question.user), notice: 'Вопрос задан')
     else
       render :edit
     end
@@ -53,11 +50,11 @@ class QuestionsController < ApplicationController
     end
   end
 
-  #def check_captcha(model)
-  # if current_user.present?
-  #  true
-  #else
-  # verify_recaptcha(model: model)
-  #end
-  #end
+  def check_captcha(model)
+   if current_user.present?
+    true
+  else
+   verify_recaptcha(model: model)
+  end
+  end
 end
